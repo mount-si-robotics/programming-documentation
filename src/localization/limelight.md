@@ -2,11 +2,10 @@
 The [Limelight 3A](https://limelightvision.io/products/limelight-3a) (hopefully the one you have) is a Very Fancy Camera™ that can automatically read apriltags and give you the position using Megatag2.
 Apriltags.
 
-## Setting up your limelight
-The limelight documentation has great resources on this.
-
 ## Setting up apriltags
-The limelight documentation has great resources for this.
+> [!NOTE]
+> [Limelight's offical apriltag guide](https://docs.limelightvision.io/docs/docs-limelight/pipeline-apriltag/apriltags) can be more helpful and updated, and it's recommended you read that first ! This section will only contain some tips and tricks.
+- If you have issues with moving at high speeds with the camera blurring, try setting your exposure lower.
 
 ## Reading apriltags
 I recommend having a function you can call to get your results from limelight. The one I have used for a couple years is:
@@ -48,4 +47,4 @@ if (result != null) {
 ```
 
 ## Conclusion
-Yep. Apriltags
+Even with Megatag2, limelight data can be jittery. It's up to you to figure out how to deal with this! At higher speeds limelight data is definately less reliable but it is decently stable at lower speeds. Be sure to test this if you are planning to use it on your robot.
