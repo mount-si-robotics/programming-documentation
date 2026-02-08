@@ -1,2 +1,2 @@
-# Using apriltags with a Camera
+# Using AprilTags with a Camera
 I havnt done this 3:

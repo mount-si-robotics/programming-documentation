@@ -5,7 +5,7 @@ This can usually be broken into three parts:
 - Rotate this vector to world space
 - Convert encoder ticks to real world units (like meters)
 
-This document will focus on **mecanum drivetrains** but concepts from this can be used for other drivetrains.
+This document will focus on **Mecanum drivetrains** but concepts from this can be used for other drivetrains.
 
 ## Forward Kinematics
 This is the most complicated part of odometry: figuring out how we actually convert encoder ticks to a vector that the robot is currently moving. Fortunately, a lot of smarter people have already figured this out for us:
@@ -17,14 +17,14 @@ This is the most complicated part of odometry: figuring out how we actually conv
     \\end{aligned}\\right.
 \\]
 
-We don't need to worry about rotation (\\( \\omega_z \\)), instead we can use the IMU to figure it out! The Java equivilent of this would be:
+We don't need to worry about rotation (\\( \\omega_z \\)), instead we can use the IMU to figure it out! The Java equivalent of this would be:
 ```java
 double dxLocal = (deltaFrontLeft + deltaFrontRight + deltaBackLeft + deltaBackRight) / 4.0;
 double dyLocal = (-deltaFrontLeft + deltaFrontRight + deltaBackLeft - deltaBackRight) / 4.0;
 ```
 
 ## Rotating the vector
-Now, we have a movement vector relative to the robot in encoder ticks. The next step is to rotate this vector to be in terms of field. We can use triganometry to figure this out:
+Now, we have a movement vector relative to the robot in encoder ticks. The next step is to rotate this vector to be in terms of field. We can use trigonometry to figure this out:
 \\[
     \\begin{split}x_2 = \\cos(\\beta) x_1 - \\sin(\\beta) y_1 \\\\
     y_2 = \\sin(\\beta) x_1 + \\cos(\\beta) y_1\\end{split}
@@ -35,16 +35,16 @@ double dx = sin(yawRads) * dxLocal + cos(yawRads) * dyLocal;
 double dy = cos(yawRads) * dxLocal - sin(yawRads) * dyLocal;
 ```
 ## Convert encoder ticks to Real World Units
-The last step is to convert the units of the vector to real world units. Use this forumula as a starting point:\
-> \\(W_{C}\\): Wheel Circumferance (in the units you want to convert to)\
+The last step is to convert the units of the vector to real world units. Use this formula as a starting point:\
+> \\(W_{C}\\): Wheel Circumference (in the units you want to convert to)\
 > \\({T_{rev}}\\): Ticks per rev at the motor (Counts per Revolution)\
 > \\({G_{r}}\\): Gear reduction
 
 \\[
     \\frac{W_{C}}{T_{rev}\\cdot G_{r}}
 \\]
-Example, using [Rev 75mm Mecanum Wheels](https://www.revrobotics.com/rev-45-1655/) using a [HD Hex Motor](https://www.revrobotics.com/REV-41-1291) and a [4:1](https://www.revrobotics.com/rev-41-1602) + [5:1](https://www.revrobotics.com/rev-41-1603/)
-Ultraplanetary Gearbox (20:1 gear ratio), we get this:
+Example, using [REV 75mm Mecanum Wheels](https://www.revrobotics.com/rev-45-1655/) using a [HD Hex Motor](https://www.revrobotics.com/REV-41-1291) and a [4:1](https://www.revrobotics.com/rev-41-1602) + [5:1](https://www.revrobotics.com/rev-41-1603/)
+UltraPlanetary Gearbox (20:1 gear ratio), we get this:
 > \\(W_{C} = 0.075m * \\pi = 0.235m\\)\
 > \\({T_{rev}} = 28\\)\
 > \\({G_{r}} = 18.8803\\)
