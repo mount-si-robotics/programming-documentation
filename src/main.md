@@ -1,2 +1,2 @@
 # Introduction
-This is very interesting intro
+Welcome to MSHS Programming Documentation! Look in the left sidebar for nativation.
