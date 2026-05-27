@@ -1,5 +1,5 @@
 # Summary
-- [Intoruction](./main.md)
+- [Introduction](./main.md)
     - [Limelight 3A Setup](./limelight_setup.md)
 - [Localization](./localization/main.md)
     - [Limelight Apriltags](./localization/limelight.md)
